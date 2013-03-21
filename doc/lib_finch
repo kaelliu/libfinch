@@ -1,0 +1,32 @@
+%%                  [k_finch]    -------------- start login/gateway server
+%%                      |
+%%                      | start sasl,finch_server_app
+%%              +----------------+
+%%              |finch_server_app|
+%%              +----------------+
+%%                      | start server_sup and start network listening
+%%              +----------------+
+%%              |   finch_sup    |
+%%              +----------------+
+%%                      | start_child % to be checked
+%%                      |
+%%				+----------------+
+%%				|finch_networking|
+%%				+--------+-------+				
+%%						 |
+%%                       | (one_for_all)
+%%         +---------------+---------+
+%%         |                          |
+%% +-------+----------+           +-------+--------+
+%% | tcp_listener_sup |           + tcp_client_sup |
+%% +-------+----------+           +-------+--------+
+%%         |(one_for_all)                 | (simple_one_for_one)
+%%    +----|------------+                         logic - pack parser
+%%   +-----|------------+								     |
+%%  +-------------------+								logic module
+%%  |  tcp_acceptor_sup |							^        |
+%%  +---------+---------+							|     emysql driver+ets as cache
+%%  			|___________________________________|
+%%							controll switch
+%%
+%%   lib_finch is written in erlang and use in mmo-games
