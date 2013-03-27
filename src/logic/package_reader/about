@@ -1,0 +1,3 @@
+package reader ,read different module package
+module id * 100 + command id,such as 10001 for registe,10 is module,1 is cmd
+the user login module's package read in pr_10,then get a record as return
